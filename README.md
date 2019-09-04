@@ -238,6 +238,35 @@ Módulo instalable via `npm install <github-user>/md-links`. Este módulo debe
 incluir tanto un ejecutable como una interfaz que podamos importar con `require`
 para usarlo programáticamente.
 
+## Objetivos de aprendizaje
+
+### Javascript
+- [ ] Uso de callbacks
+- [ ] Consumo de Promesas
+- [ ] ES modules
+
+### Firebase
+- [ ] Firestore
+- [ ] Firebase Auth
+- [ ] Firebase security rules
+- [ ] Observables
+
+### Testing
+- [ ] Testeo de tus funciones
+- [ ] Testeo asíncrono
+- [ ] Mocking
+
+### Git y Github
+- [ ] Colaboración en Github
+- [ ] Organización en Github
+
+### Buenas prácticas de desarrollo
+- [ ] Modularización
+- [ ] Nomenclatura / Semántica
+- [ ] Linting
+
+***
+
 ## Pistas / Tips
 
 ### FAQs
