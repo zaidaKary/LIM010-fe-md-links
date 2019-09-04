@@ -243,13 +243,14 @@ para usarlo programáticamente.
 ### Javascript
 - [ ] Uso de callbacks
 - [ ] Consumo de Promesas
+- [ ] Creacion de Promesas
 - [ ] ES modules
+- [ ] Recursión
 
-### Firebase
-- [ ] Firestore
-- [ ] Firebase Auth
-- [ ] Firebase security rules
-- [ ] Observables
+### Node
+- [ ] API file system
+- [ ] API path
+- [ ] CLI (Command Line Interface - Interfaz de Línea de Comando)
 
 ### Testing
 - [ ] Testeo de tus funciones
@@ -257,7 +258,6 @@ para usarlo programáticamente.
 - [ ] Mocking
 
 ### Git y Github
-- [ ] Colaboración en Github
 - [ ] Organización en Github
 
 ### Buenas prácticas de desarrollo
