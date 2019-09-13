@@ -1,6 +1,6 @@
 # Markdown Links
 
-
+![Diagrama de flujo](https://github.com/zaidaKary/LIM010-fe-md-links/blob/master/img/Diagrama%20de%20flujo.png?raw=true)
 
 ## Preámbulo
 
