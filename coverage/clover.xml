@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1568333304805" clover="3.2.0">
-  <project timestamp="1568333304805" name="All files">
-    <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2" elements="7" coveredelements="7" complexity="0" loc="5" ncloc="5" packages="1" files="1" classes="1"/>
-    <file name="path.js" path="C:\Users\usuario-libre\Desktop\ProyectoLinks\LIM010-fe-md-links\libreria\src\path.js">
-      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
-      <line num="1" count="1" type="stmt"/>
+<coverage generated="1568844086529" clover="3.2.0">
+  <project timestamp="1568844086529" name="All files">
+    <metrics statements="33" coveredstatements="33" conditionals="14" coveredconditionals="14" methods="7" coveredmethods="7" elements="54" coveredelements="54" complexity="0" loc="33" ncloc="33" packages="1" files="2" classes="2"/>
+    <file name="file.js" path="C:\Users\usuario-libre\Desktop\ProyectoLinks\LIM010-fe-md-links\src\file.js">
+      <metrics statements="18" coveredstatements="18" conditionals="8" coveredconditionals="8" methods="4" coveredmethods="4"/>
       <line num="3" count="1" type="stmt"/>
       <line num="4" count="1" type="stmt"/>
+      <line num="6" count="6" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="9" count="5" type="cond" truecount="4" falsecount="0"/>
+      <line num="10" count="3" type="stmt"/>
+      <line num="12" count="2" type="stmt"/>
+      <line num="17" count="1" type="stmt"/>
+      <line num="18" count="4" type="stmt"/>
+      <line num="19" count="4" type="stmt"/>
+      <line num="20" count="4" type="cond" truecount="2" falsecount="0"/>
+      <line num="21" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="22" count="2" type="stmt"/>
+      <line num="25" count="1" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+      <line num="27" count="3" type="stmt"/>
+      <line num="28" count="3" type="stmt"/>
+      <line num="31" count="4" type="stmt"/>
+    </file>
+    <file name="path.js" path="C:\Users\usuario-libre\Desktop\ProyectoLinks\LIM010-fe-md-links\src\path.js">
+      <metrics statements="15" coveredstatements="15" conditionals="6" coveredconditionals="6" methods="3" coveredmethods="3"/>
+      <line num="1" count="1" type="stmt"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="5" count="1" type="stmt"/>
+      <line num="6" count="2" type="cond" truecount="2" falsecount="0"/>
       <line num="7" count="1" type="stmt"/>
-      <line num="8" count="2" type="stmt"/>
+      <line num="9" count="1" type="stmt"/>
+      <line num="12" count="1" type="stmt"/>
+      <line num="13" count="2" type="cond" truecount="2" falsecount="0"/>
+      <line num="14" count="1" type="stmt"/>
+      <line num="16" count="1" type="stmt"/>
+      <line num="19" count="1" type="stmt"/>
+      <line num="20" count="6" type="cond" truecount="2" falsecount="0"/>
+      <line num="21" count="2" type="stmt"/>
+      <line num="23" count="4" type="stmt"/>
     </file>
   </project>
 </coverage>
