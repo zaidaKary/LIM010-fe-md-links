@@ -2,6 +2,7 @@ import { convertPathAbs, existPath, validatePath } from '../src/path.js';
 import {
   verifyFile, isMarkdown, saveArrayPathFile, readFile, arrayLinksFile,
 } from '../src/file.js';
+import { validateLink } from '../src/validate.js';
 
 const path = require('path');
 
@@ -37,7 +38,7 @@ describe('Deberia convertir una ruta relativa a una ruta absoluta', () => {
     expect(convertPathAbs('./test/prueba/markdown.md')).toBe(path.join(process.cwd(), '\\test\\prueba\\markdown.md'));
   });
   it('Deberia retornar una ruta si ya es absoluta', () => {
-    expect(convertPathAbs('C:\\Users\\usuario-libre\\Desktop\\ProyectoLinks\\LIM010-fe-md-links\\test\\prueba\\markdown.md')).toBe('C:\\Users\\usuario-libre\\Desktop\\ProyectoLinks\\LIM010-fe-md-links\\test\\prueba\\markdown.md');
+    expect(convertPathAbs(path.join(process.cwd(), '\\test\\prueba\\markdown.md'))).toBe(path.join(process.cwd(), '\\test\\prueba\\markdown.md'));
   });
 });
 
@@ -70,8 +71,8 @@ describe('Recorriendo el directorio', () => {
     expect(typeof saveArrayPathFile).toBe('function');
   });
   it('Deberia retornar un array de archivos .md o .markdown', () => {
-    expect(saveArrayPathFile('./test/prueba/pruebita')).toEqual(['C:\\Users\\usuario-libre\\Desktop\\ProyectoLinks\\LIM010-fe-md-links\\test\\prueba\\pruebita\\link.md',
-      'C:\\Users\\usuario-libre\\Desktop\\ProyectoLinks\\LIM010-fe-md-links\\test\\prueba\\pruebita\\link2.md']);
+    expect(saveArrayPathFile('./test/prueba/pruebita')).toEqual([path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+      path.join(process.cwd(), '\\test\\prueba\\pruebita\\link2.md')]);
   });
 });
 
@@ -80,7 +81,7 @@ describe('Deberia leer el contenido de un archivo', () => {
     expect(typeof readFile).toBe('function');
   });
   it('Deberia retornar el contenido del archivo', () => {
-    expect(readFile('./test/prueba/pruebita/link.md')).toEqual('Facebook [Facebook](https://es-la.facebook.com/)');
+    expect(readFile('./test/prueba/pruebita/link.md')).toEqual('Facebook [Facebook](https://es-la.facebook.com/)Google [Google](https://www.google.com/hx)Link no existe [Google link no existe](htt://www.google.com/hx)');
   });
 });
 
@@ -92,7 +93,46 @@ describe('Deberia obtener los links de las rutas absolutas en una array de objet
     expect(arrayLinksFile('./test/prueba/pruebita/link.md')).toEqual([{
       href: 'https://es-la.facebook.com/',
       text: 'Facebook',
-      file: 'C:\\Users\\usuario-libre\\Desktop\\ProyectoLinks\\LIM010-fe-md-links\\test\\prueba\\pruebita\\link.md',
+      file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+    },
+    {
+      href: 'https://www.google.com/hx',
+      text: 'Google',
+      file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+    },
+    {
+      href: 'htt://www.google.com/hx',
+      text: 'Google link no existe',
+      file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
     }]);
   });
+});
+
+describe('Deberia validar los links del array de objetos', () => {
+  it('Debería vevolvernos una promesa', (done) => validateLink(path.join(process.cwd(),
+    './test/prueba/pruebita'))
+    .then((res) => {
+      expect(res).toEqual([{
+        href: 'https://es-la.facebook.com/',
+        text: 'Facebook',
+        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+        status: 200,
+        statusText: 'OK',
+      },
+      {
+        href: 'https://www.google.com/hx',
+        text: 'Google',
+        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+        status: 404,
+        statusText: 'Fail',
+      },
+      {
+        href: 'htt://www.google.com/hx',
+        text: 'Google link no existe',
+        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+        status: 'Error',
+        statusText: 'Este link no existe',
+      }]);
+      done();
+    }));
 });

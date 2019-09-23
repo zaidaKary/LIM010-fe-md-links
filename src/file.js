@@ -35,6 +35,7 @@ export const saveArrayPathFile = (route) => {
 // console.log(saveArrayPathFile('./test/prueba'));
 // Lee el contenido de un archivo
 export const readFile = (route) => fs.readFileSync(route, 'utf8');
+// console.log(readFile('./test/prueba/pruebita/link.md'));
 // Obteniendo los links de las rutas absolutas en una array de objetos (href, text, file)
 export const arrayLinksFile = (route) => {
   const linksArrayFile = [];
