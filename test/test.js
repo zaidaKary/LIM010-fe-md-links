@@ -3,6 +3,7 @@ import {
   verifyFile, isMarkdown, saveArrayPathFile, readFile, arrayLinksFile,
 } from '../src/file.js';
 import { validateLink } from '../src/validate.js';
+import { mdLinks } from '../src/mdLinks.js';
 
 const path = require('path');
 
@@ -135,4 +136,56 @@ describe('Deberia validar los links del array de objetos', () => {
       }]);
       done();
     }));
+});
+
+describe('Deberia retornar el array de objetos segun la options: validate', () => {
+  it('Debería ser una función', () => {
+    expect(typeof mdLinks).toBe('function');
+  });
+  it('Debería retornar las cinco propiedades del array de objetos cuando validate: true', (done) => {
+    mdLinks(path.join(process.cwd(), './test/prueba/pruebita'), { validate: true }).then((res) => {
+      expect(res).toEqual([{
+        href: 'https://es-la.facebook.com/',
+        text: 'Facebook',
+        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+        status: 200,
+        statusText: 'OK',
+      },
+      {
+        href: 'https://www.google.com/hx',
+        text: 'Google',
+        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+        status: 404,
+        statusText: 'Fail',
+      },
+      {
+        href: 'htt://www.google.com/hx',
+        text: 'Google link no existe',
+        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+        status: 'Error',
+        statusText: 'Este link no existe',
+      }]);
+      done();
+    });
+  });
+  it('Debería retornar las tres propiedades del array de objetos cuando validate: false', (done) => {
+    mdLinks(path.join(process.cwd(), './test/prueba/pruebita'), { validate: false }).then((res) => {
+      expect(res).toEqual([{
+        href: 'https://es-la.facebook.com/',
+        text: 'Facebook',
+        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+      },
+      {
+        href: 'https://www.google.com/hx',
+        text: 'Google',
+        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+      },
+      {
+        href: 'htt://www.google.com/hx',
+        text: 'Google link no existe',
+        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+      }]);
+      done();
+    });
+  });
 });
