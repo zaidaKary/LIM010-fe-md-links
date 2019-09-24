@@ -24,6 +24,9 @@ export const validateLink = (route) => {
       resolve(objectNew);
     });
   }));
+  // retorna un arreglo con los valores de cada una de las promesas (cuando todas
+  // las promesas son exitosas)
+  // retorna el error de la promesa rechazada (cuando una de las promesas es rechazada)
   return Promise.all(arrayPromises);// devuelve una promesa que termina correctamente
 };
 

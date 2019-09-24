@@ -4,8 +4,83 @@ import {
 } from '../src/file.js';
 import { validateLink } from '../src/validate.js';
 import { mdLinks } from '../src/mdLinks.js';
+import { stats } from '../src/stats.js';
 
 const path = require('path');
+// array de objetos con tres propiedades
+const output1 = [{
+  href: 'https://es-la.facebook.com/',
+  text: 'Facebook',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+},
+{
+  href: 'https://www.google.com/hx',
+  text: 'Google',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+},
+{
+  href: 'htt://www.google.com/hx',
+  text: 'Google link no existe',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+}];
+// array de objetos con cinco propiedades
+const output2 = [{
+  href: 'https://es-la.facebook.com/',
+  text: 'Facebook',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+  status: 200,
+  statusText: 'OK',
+},
+{
+  href: 'https://www.google.com/hx',
+  text: 'Google',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+  status: 404,
+  statusText: 'Fail',
+},
+{
+  href: 'htt://www.google.com/hx',
+  text: 'Google link no existe',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+  status: 'Error',
+  statusText: 'Este link no existe',
+}];
+const output3 = [{
+  href: 'https://es-la.facebook.com/',
+  text: 'Facebook',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+  status: 200,
+  statusText: 'OK',
+},
+{
+  href: 'https://www.google.com/hx',
+  text: 'Google',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+  status: 404,
+  statusText: 'Fail',
+},
+{
+  href: 'htt://www.google.com/hx',
+  text: 'Google link no existe',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+  status: 'Error',
+  statusText: 'Este link no existe',
+}];
+const output4 = [{
+  href: 'https://es-la.facebook.com/',
+  text: 'Facebook',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+},
+{
+  href: 'https://www.google.com/hx',
+  text: 'Google',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+},
+{
+  href: 'htt://www.google.com/hx',
+  text: 'Google link no existe',
+  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
+}];
 
 describe('Verificando la existencia de la ruta', () => {
   it('Deberia retornar una funcion', () => {
@@ -91,21 +166,7 @@ describe('Deberia obtener los links de las rutas absolutas en una array de objet
     expect(typeof arrayLinksFile).toBe('function');
   });
   it('Deberia retornar un array de objetos con las propiedades: href, text, file', () => {
-    expect(arrayLinksFile('./test/prueba/pruebita/link.md')).toEqual([{
-      href: 'https://es-la.facebook.com/',
-      text: 'Facebook',
-      file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-    },
-    {
-      href: 'https://www.google.com/hx',
-      text: 'Google',
-      file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-    },
-    {
-      href: 'htt://www.google.com/hx',
-      text: 'Google link no existe',
-      file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-    }]);
+    expect(arrayLinksFile('./test/prueba/pruebita/link.md')).toEqual(output1);
   });
 });
 
@@ -113,27 +174,7 @@ describe('Deberia validar los links del array de objetos', () => {
   it('Debería vevolvernos una promesa', (done) => validateLink(path.join(process.cwd(),
     './test/prueba/pruebita'))
     .then((res) => {
-      expect(res).toEqual([{
-        href: 'https://es-la.facebook.com/',
-        text: 'Facebook',
-        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-        status: 200,
-        statusText: 'OK',
-      },
-      {
-        href: 'https://www.google.com/hx',
-        text: 'Google',
-        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-        status: 404,
-        statusText: 'Fail',
-      },
-      {
-        href: 'htt://www.google.com/hx',
-        text: 'Google link no existe',
-        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-        status: 'Error',
-        statusText: 'Este link no existe',
-      }]);
+      expect(res).toEqual(output2);
       done();
     }));
 });
@@ -142,50 +183,21 @@ describe('Deberia retornar el array de objetos segun la options: validate', () =
   it('Debería ser una función', () => {
     expect(typeof mdLinks).toBe('function');
   });
-  it('Debería retornar las cinco propiedades del array de objetos cuando validate: true', (done) => {
+  it('Deberia retornar las cinco propiedades del array de objetos cuando validate: true', (done) => {
     mdLinks(path.join(process.cwd(), './test/prueba/pruebita'), { validate: true }).then((res) => {
-      expect(res).toEqual([{
-        href: 'https://es-la.facebook.com/',
-        text: 'Facebook',
-        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-        status: 200,
-        statusText: 'OK',
-      },
-      {
-        href: 'https://www.google.com/hx',
-        text: 'Google',
-        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-        status: 404,
-        statusText: 'Fail',
-      },
-      {
-        href: 'htt://www.google.com/hx',
-        text: 'Google link no existe',
-        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-        status: 'Error',
-        statusText: 'Este link no existe',
-      }]);
+      expect(res).toEqual(output3);
       done();
     });
   });
-  it('Debería retornar las tres propiedades del array de objetos cuando validate: false', (done) => {
+  it('Deberia retornar las tres propiedades del array de objetos cuando validate: false', (done) => {
     mdLinks(path.join(process.cwd(), './test/prueba/pruebita'), { validate: false }).then((res) => {
-      expect(res).toEqual([{
-        href: 'https://es-la.facebook.com/',
-        text: 'Facebook',
-        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-      },
-      {
-        href: 'https://www.google.com/hx',
-        text: 'Google',
-        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-      },
-      {
-        href: 'htt://www.google.com/hx',
-        text: 'Google link no existe',
-        file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-      }]);
+      expect(res).toEqual(output4);
       done();
     });
+  });
+});
+describe('Deberia retornar un String del Total y Unique de los links', () => {
+  it('Deberia retornar un String de Total y Unique', () => {
+    expect(stats(output3)).toBe('Total: 3 Unique: 3');
   });
 });
