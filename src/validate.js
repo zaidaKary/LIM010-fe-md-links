@@ -19,7 +19,7 @@ export const validateLink = (route) => {
       }
     }).catch(() => {
       const objectNew = { ...object };
-      objectNew.status = 'Error';
+      objectNew.status = 'Error'; // error.message
       objectNew.statusText = 'Este link no existe';
       resolve(objectNew);
     });

@@ -18,6 +18,9 @@
   },
   "author": "Zaida Sales",
   "license": "MIT",
+  "bin": {
+    "md-links": "lib/cli.js"
+  },
   "bugs": {
     "url": "https://github.com/zaidaKary/LIM010-fe-md-links/issues"
   },

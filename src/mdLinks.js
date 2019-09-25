@@ -7,7 +7,7 @@ import { validateLink } from './validate.js';
 export const mdLinks = (route, options) => new Promise((resolve) => {
   // convirtiendo a ruta absoluta
   const routeAbs = convertPathAbs(route);
-  if (options.validate === true) {
+  if (options && options.validate === true) {
     // validando link (href, text, file, status, statusText)
     resolve(validateLink(routeAbs));
   } else {
