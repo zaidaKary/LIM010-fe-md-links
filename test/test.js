@@ -4,7 +4,7 @@ import {
 } from '../src/file.js';
 import { validateLink } from '../src/validate.js';
 import { mdLinks } from '../src/mdLinks.js';
-import { stats } from '../src/stats.js';
+import { stats, statValidate } from '../src/stats.js';
 
 const path = require('path');
 // array de objetos con tres propiedades
@@ -16,11 +16,6 @@ const output1 = [{
 {
   href: 'https://www.google.com/hx',
   text: 'Google',
-  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-},
-{
-  href: 'htt://www.google.com/hx',
-  text: 'Google link no existe',
   file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
 }];
 // array de objetos con cinco propiedades
@@ -37,49 +32,6 @@ const output2 = [{
   file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
   status: 404,
   statusText: 'Fail',
-},
-{
-  href: 'htt://www.google.com/hx',
-  text: 'Google link no existe',
-  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-  status: 'Error',
-  statusText: 'Este link no existe',
-}];
-const output3 = [{
-  href: 'https://es-la.facebook.com/',
-  text: 'Facebook',
-  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-  status: 200,
-  statusText: 'OK',
-},
-{
-  href: 'https://www.google.com/hx',
-  text: 'Google',
-  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-  status: 404,
-  statusText: 'Fail',
-},
-{
-  href: 'htt://www.google.com/hx',
-  text: 'Google link no existe',
-  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-  status: 'Error',
-  statusText: 'Este link no existe',
-}];
-const output4 = [{
-  href: 'https://es-la.facebook.com/',
-  text: 'Facebook',
-  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-},
-{
-  href: 'https://www.google.com/hx',
-  text: 'Google',
-  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-},
-{
-  href: 'htt://www.google.com/hx',
-  text: 'Google link no existe',
-  file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
 }];
 
 describe('Verificando la existencia de la ruta', () => {
@@ -157,7 +109,7 @@ describe('Deberia leer el contenido de un archivo', () => {
     expect(typeof readFile).toBe('function');
   });
   it('Deberia retornar el contenido del archivo', () => {
-    expect(readFile('./test/prueba/pruebita/link.md')).toEqual('Facebook [Facebook](https://es-la.facebook.com/)Google [Google](https://www.google.com/hx)Link no existe [Google link no existe](htt://www.google.com/hx)');
+    expect(readFile('./test/prueba/pruebita/link.md')).toEqual('Facebook [Facebook](https://es-la.facebook.com/)Google [Google](https://www.google.com/hx)');
   });
 });
 
@@ -185,19 +137,30 @@ describe('Deberia retornar el array de objetos segun la options: validate', () =
   });
   it('Deberia retornar las cinco propiedades del array de objetos cuando validate: true', (done) => {
     mdLinks(path.join(process.cwd(), './test/prueba/pruebita'), { validate: true }).then((res) => {
-      expect(res).toEqual(output3);
+      expect(res).toEqual(output2);
       done();
     });
   });
   it('Deberia retornar las tres propiedades del array de objetos cuando validate: false', (done) => {
     mdLinks(path.join(process.cwd(), './test/prueba/pruebita'), { validate: false }).then((res) => {
-      expect(res).toEqual(output4);
+      expect(res).toEqual(output1);
       done();
     });
   });
 });
 describe('Deberia retornar un String del Total y Unique de los links', () => {
+  it('Deberia ser una función', () => {
+    expect(typeof stats).toBe('function');
+  });
   it('Deberia retornar un String de Total y Unique', () => {
-    expect(stats(output3)).toBe('Total: 3 Unique: 3');
+    expect(stats(output2)).toBe('Total: 2 Unique: 2');
+  });
+});
+describe('Deberia de retornar un String del Total, Unique y Bronken de los links', () => {
+  it('Deberia ser una función', () => {
+    expect(typeof statValidate).toBe('function');
+  });
+  it('Deberia retornar un String de Total, Unique y Bronken', () => {
+    expect(statValidate(output2)).toBe('Total: 2 Unique: 2 Broken: 1');
   });
 });

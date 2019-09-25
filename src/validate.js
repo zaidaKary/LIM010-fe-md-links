@@ -17,11 +17,6 @@ export const validateLink = (route) => {
         objectNew.statusText = 'Fail';// FAIL
         resolve(objectNew);
       }
-    }).catch(() => {
-      const objectNew = { ...object };
-      objectNew.status = 'Error'; // error.message
-      objectNew.statusText = 'Este link no existe';
-      resolve(objectNew);
     });
   }));
   // retorna un arreglo con los valores de cada una de las promesas (cuando todas
