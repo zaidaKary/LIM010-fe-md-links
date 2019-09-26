@@ -158,7 +158,7 @@ describe('Deberia retornar un String del Total y Unique de los links', () => {
     expect(typeof stats).toBe('function');
   });
   it('Deberia retornar un String de Total y Unique', () => {
-    expect(stats(output2)).toBe('Total: 2\n Unique: 2');
+    expect(stats(output2)).toBe('Total: 2\nUnique: 2');
   });
 });
 describe('Deberia de retornar un String del Total, Unique y Bronken de los links', () => {
@@ -166,7 +166,7 @@ describe('Deberia de retornar un String del Total, Unique y Bronken de los links
     expect(typeof statValidate).toBe('function');
   });
   it('Deberia retornar un String de Total, Unique y Bronken', () => {
-    expect(statValidate(output2)).toBe('Total: 2\n Unique: 2\n Broken: 1');
+    expect(statValidate(output2)).toBe('Total: 2\nUnique: 2\nBroken: 1');
   });
 });
 describe('Deberia de retornar un array de string', () => {

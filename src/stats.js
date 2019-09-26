@@ -18,7 +18,7 @@
 export const stats = (arrayObject) => {
   const arrayLinks = arrayObject.map((element) => element.href);
   const unique = [...new Set(arrayLinks)];
-  const resultStats = `Total: ${arrayLinks.length}\n Unique: ${unique.length}`;
+  const resultStats = `Total: ${arrayLinks.length}\nUnique: ${unique.length}`;
   return resultStats;
 };
 // console.log(stats(array));
@@ -26,7 +26,7 @@ export const statValidate = (arrayObject) => {
   const arrayLinks = arrayObject.map((element) => element.href);
   const unique = [...new Set(arrayLinks)];
   const Broken = arrayObject.filter((element) => element.statusText === 'Fail');
-  const resultStatsValidate = `Total: ${arrayLinks.length}\n Unique: ${unique.length}\n Broken: ${Broken.length}`;
+  const resultStatsValidate = `Total: ${arrayLinks.length}\nUnique: ${unique.length}\nBroken: ${Broken.length}`;
   return resultStatsValidate;
 };
 // console.log(statValidate(array));
