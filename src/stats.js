@@ -13,13 +13,6 @@
 //   file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
 //   status: 404,
 //   statusText: 'Fail',
-// },
-// {
-//   href: 'htt://www.google.com/hx',
-//   text: 'Google link no existe',
-//   file: path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md'),
-//   status: 'Error',
-//   statusText: 'Este link no existe',
 // }];
 
 export const stats = (arrayObject) => {
@@ -37,3 +30,8 @@ export const statValidate = (arrayObject) => {
   return resultStatsValidate;
 };
 // console.log(statValidate(array));
+export const functionValidate = (arrayObject) => {
+  const arrayElements = arrayObject.map((element) => `${element.file} ${element.href} ${element.statusText} ${element.status} ${element.text}`);
+  return arrayElements;
+};
+// console.log(functionValidate(array));

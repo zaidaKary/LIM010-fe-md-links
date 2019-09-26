@@ -4,7 +4,7 @@ import {
 } from '../src/file.js';
 import { validateLink } from '../src/validate.js';
 import { mdLinks } from '../src/mdLinks.js';
-import { stats, statValidate } from '../src/stats.js';
+import { stats, statValidate, functionValidate } from '../src/stats.js';
 
 const path = require('path');
 // array de objetos con tres propiedades
@@ -33,9 +33,11 @@ const output2 = [{
   status: 404,
   statusText: 'Fail',
 }];
+const output3 = ['C:\\Users\\usuario-libre\\Desktop\\ProyectoLinks\\LIM010-fe-md-links\\test\\prueba\\pruebita\\link.md https://es-la.facebook.com/ OK 200 Facebook',
+  'C:\\Users\\usuario-libre\\Desktop\\ProyectoLinks\\LIM010-fe-md-links\\test\\prueba\\pruebita\\link.md https://www.google.com/hx Fail 404 Google'];
 
 describe('Verificando la existencia de la ruta', () => {
-  it('Deberia retornar una funcion', () => {
+  it('Deberia retornar una función', () => {
     expect(typeof existPath).toBe('function');
   });
   it('Deberia retornar true si la ruta existe', () => {
@@ -47,7 +49,7 @@ describe('Verificando la existencia de la ruta', () => {
 });
 
 describe('Validar si lo ingresado es una ruta', () => {
-  it('Deberia retornar una funcion', () => {
+  it('Deberia retornar una función', () => {
     expect(typeof validatePath).toBe('function');
   });
   it('Deberia retornar true para una ruta valida', () => {
@@ -59,7 +61,7 @@ describe('Validar si lo ingresado es una ruta', () => {
 });
 
 describe('Deberia convertir una ruta relativa a una ruta absoluta', () => {
-  it('Deberia ser una funcion', () => {
+  it('Deberia ser una función', () => {
     expect(typeof convertPathAbs).toBe('function');
   });
   it('Deberia convertir la ruta relativa a ruta absoluta', () => {
@@ -71,7 +73,7 @@ describe('Deberia convertir una ruta relativa a una ruta absoluta', () => {
 });
 
 describe('Deberia retornar si es o no un archivo', () => {
-  it('Deberia ser una funcion', () => {
+  it('Deberia ser una función', () => {
     expect(typeof verifyFile).toBe('function');
   });
   it('Deberia retornar true si es un archivo', () => {
@@ -83,7 +85,7 @@ describe('Deberia retornar si es o no un archivo', () => {
 });
 
 describe('Verificando si es la extension de un archivo markdown', () => {
-  it('Deberia retornar una funcion', () => {
+  it('Deberia retornar una función', () => {
     expect(typeof isMarkdown).toBe('function');
   });
   it('Deberia retornar true si es un archivo markdown', () => {
@@ -95,7 +97,7 @@ describe('Verificando si es la extension de un archivo markdown', () => {
 });
 
 describe('Recorriendo el directorio', () => {
-  it('Deberia retornar una funcion', () => {
+  it('Deberia retornar una función', () => {
     expect(typeof saveArrayPathFile).toBe('function');
   });
   it('Deberia retornar un array de archivos .md o .markdown', () => {
@@ -105,7 +107,7 @@ describe('Recorriendo el directorio', () => {
 });
 
 describe('Deberia leer el contenido de un archivo', () => {
-  it('Deberia ser una funcion', () => {
+  it('Deberia ser una función', () => {
     expect(typeof readFile).toBe('function');
   });
   it('Deberia retornar el contenido del archivo', () => {
@@ -114,7 +116,7 @@ describe('Deberia leer el contenido de un archivo', () => {
 });
 
 describe('Deberia obtener los links de las rutas absolutas en una array de objetos', () => {
-  it('Debería ser una función', () => {
+  it('Deberia ser una función', () => {
     expect(typeof arrayLinksFile).toBe('function');
   });
   it('Deberia retornar un array de objetos con las propiedades: href, text, file', () => {
@@ -123,7 +125,10 @@ describe('Deberia obtener los links de las rutas absolutas en una array de objet
 });
 
 describe('Deberia validar los links del array de objetos', () => {
-  it('Debería vevolvernos una promesa', (done) => validateLink(path.join(process.cwd(),
+  it('Deberia ser una función', () => {
+    expect(typeof validateLink).toBe('function');
+  });
+  it('Deberia vevolvernos una promesa', (done) => validateLink(path.join(process.cwd(),
     './test/prueba/pruebita'))
     .then((res) => {
       expect(res).toEqual(output2);
@@ -132,7 +137,7 @@ describe('Deberia validar los links del array de objetos', () => {
 });
 
 describe('Deberia retornar el array de objetos segun la options: validate', () => {
-  it('Debería ser una función', () => {
+  it('Deberia ser una función', () => {
     expect(typeof mdLinks).toBe('function');
   });
   it('Deberia retornar las cinco propiedades del array de objetos cuando validate: true', (done) => {
@@ -162,5 +167,13 @@ describe('Deberia de retornar un String del Total, Unique y Bronken de los links
   });
   it('Deberia retornar un String de Total, Unique y Bronken', () => {
     expect(statValidate(output2)).toBe('Total: 2\n Unique: 2\n Broken: 1');
+  });
+});
+describe('Deberia de retornar un array de string', () => {
+  it('Deberia ser una función', () => {
+    expect(typeof functionValidate).toBe('function');
+  });
+  it('Deberia retornar un array de string', () => {
+    expect(functionValidate(output2)).toEqual(output3);
   });
 });
