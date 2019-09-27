@@ -43,9 +43,9 @@ Se diseñó el diagrama de flujo para tener una información visual de la trayec
 
 Se utilizó las herramientas de GitHub para la organización y planificación del proyecto.
 
-![Board1](https://user-images.githubusercontent.com/42952494/65783405-52ba1380-e115-11e9-99f8-9c8f4022f448.png)
+![Board1](https://user-images.githubusercontent.com/42952494/65801452-c45a8780-e13e-11e9-91b2-d74e2e320d8e.png)
 
-![Board2](https://user-images.githubusercontent.com/42952494/65783596-ba705e80-e115-11e9-8749-5bdc80974a15.png)
+![Board2](https://user-images.githubusercontent.com/42952494/65801513-e18f5600-e13e-11e9-88f5-adea4328097b.png)
 
 ## Guía de uso e instalación de la librería
 
@@ -57,7 +57,7 @@ Para instalar esta librería debe ejecutar la siguiente linea de comando:
 
 ### Guía de uso
 
-La aplicación se puede ejecutar de la siguiente manera a través de la terminal: `md-Links <path> [options]`
+La aplicación se puede ejecutar de la siguiente manera a través de la terminal: `md-links <path> [options]`
 
 Donde:
 - `path`: Ruta absoluta o relativa al archivo o directorio.
@@ -67,19 +67,19 @@ Donde:
 
 Se tiene las siguientes opciones para ejecutar en la linea de comando:
 
-- `md-Links <path>`
-- `md-Links <path> --stats` o `md-Links <path> --s`
-- `md-Links <path> --validate` o `md-Links <path> --v`
-- `md-Links <path> --validate --stats` o `md-Links <path> --stats --validate `
+- `md-links <path>`
+- `md-links <path> --stats` o `md-links <path> --s`
+- `md-links <path> --validate` o `md-links <path> --v`
+- `md-links <path> --validate --stats` o `md-links <path> --stats --validate `
 
 Veamos los siguientes ejemplos de uso del ejecutable:
 
-- Cuando ingresemos en la linea de comando: `md-Links ./test/prueba`
+- Cuando ingresemos en la linea de comando: `md-links ./some/example.md`
 
 Retornará lo siguiente:
 
 ```sh13d99df067c1
-$ md-links ./test/prueba
+$ md-links ./some/example.md
 ./some/example.md http://algo.com/2/3/ Link a algo
 ./some/example.md https://otra-cosa.net/algun-doc.html algún doc
 ./some/example.md http://google.com/ Google
@@ -91,24 +91,24 @@ argumento), analizar el archivo Markdown e imprimir los links que vaya
 encontrando, junto con la ruta del archivo donde aparece y el texto
 que hay dentro del link (truncado a 50 caracteres).
 
-- Cuando ingresemos en la linea de comando: `md-Links ./test/prueba --stats`
+- Cuando ingresemos en la linea de comando: `md-links ./some/example.md --stats`
 
 Retornará un texto con estadísticas básicas sobre los links:
 
 ```sh13d99df067c1
-$ md-links ./test/prueba --stats
-Total: 2
-Unique: 2
+$ md-links ./some/example.md --stats
+Total: 3
+Unique: 3
 ```
 
-- Cuando ingresemos en la linea de comando: `md-Links ./test/prueba --validate` el módulo hará una petición HTTP para
+- Cuando ingresemos en la linea de comando: `md-links ./some/example.md --validate` el módulo hará una petición HTTP para
 averiguar si el link funciona o no. Si el link resulta en una redirección a una
 URL que responde ok, entonces consideraremos el link como ok.
 
 Retornará lo siguiente:
 
 ```sh13d99df067c1
-$ md-Links ./test/prueba --validate
+$ md-links ./some/example.md --validate
 ./some/example.md http://algo.com/2/3/ ok 200 Link a algo
 ./some/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
 ./some/example.md http://google.com/ ok 301 Google
@@ -118,16 +118,46 @@ Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de
 la URL, así como el status de la respuesta recibida a la petición HTTP a dicha
 URL.
 
-- Cuando ingresemos en la linea de comando: `md-Links ./test/prueba --stats --validate`
+- Cuando ingresemos en la linea de comando: `md-links ./some/example.md --stats --validate` o `md-Links ./some/example.md --validate --stats`
 
 Retornará las estadísticas de los resultados de la validación.
 
 ```sh13d99df067c1
-$ md-links ./test/prueba --stats --validate
-Total: 2
-Unique: 2
+$ md-links ./some/example.md --stats --validate
+Total: 3
+Unique: 3
 Broken: 1
 ```
+Casos extras:
+
+- Cuando solo ingresamos en la linea de comando `md-links`
+
+Retornará un mensaje:
+
+```sh13d99df067c1
+$ md-links
+Ingrese una ruta, por ejemplo: md-links ./some/example.md
+```
+
+- Cuando ingresamos en la linea de comando: `md-links ./some/example.md --valid --sts`
+
+Retornará un mensaje:
+
+```sh13d99df067c1
+$ md-links ./some/example.md --valid --sts
+Comandos incorrectos!!!
+```
+Lo anterior nos sale porque hemos ingresado los dos comandos incorrectos.
+
+- Cuando ingresamos en la linea de comando: `md-links ./some/example.md --hola`
+
+Retornará un mensaje:
+
+```sh13d99df067c1
+$ md-links ./some/example.md --hola
+Comando incorrecto!!!
+```
+Lo anterior nos sale porque hemos ingresado un comando incorrecto.
 
 ## Documentación técnica de la libreria
 
@@ -136,6 +166,26 @@ Duración del proyecto: 3 semanas.
 Metodología usada: Scrum.
 
 ### Recursos utilizados
+
+- [Acerca de Node.js - Documentación oficial](https://nodejs.org/es/about/)
+- [Node.js file system - Documentación oficial](https://nodejs.org/api/fs.html)
+- [Node.js http.get - Documentación oficial](https://nodejs.org/api/http.html#http_http_get_options_callback)
+- [Node.js - Wikipedia](https://es.wikipedia.org/wiki/Node.js)
+- [¿Qué es Node.js y para qué sirve? - drauta.com](https://www.drauta.com/que-es-nodejs-y-para-que-sirve)
+- [Node.js y npm](https://www.genbeta.com/desarrollo/node-js-y-npm)
+- [Módulos, librerías, paquetes, frameworks... ¿cuál es la diferencia?](http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175)
+- [Asíncronía en js](https://carlosazaustre.com/manejando-la-asincronia-en-javascript/)
+- [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
+- [Publicar packpage](https://docs.npmjs.com/getting-started/publishing-npm-packages)
+- [Crear módulos en Node.js](https://docs.npmjs.com/getting-started/publishing-npm-packages)
+- [Leer un archivo](https://nodejs.org/api/fs.html#fs_fs_readfile_path_options_callback)
+- [Leer un directorio](https://nodejs.org/api/fs.html#fs_fs_readdir_path_options_callback)
+- [Path](https://nodejs.org/api/path.html)
+- [Linea de comando CLI](https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e)
+- [Promise](https://javascript.info/promise-basics)
+- [Comprendiendo Promesas en Js](https://hackernoon.com/understanding-promises-in-javascript-13d99df067c1)
+- [Pill de recursión - video](https://www.youtube.com/watch?v=lPPgY3HLlhQ&t=916s)
+- [Pill de recursión - repositorio](https://github.com/merunga/pildora-recursion)
 
 ## Objetivos de aprendizaje en este proyecto
 
