@@ -30,8 +30,13 @@ export const statValidate = (arrayObject) => {
   return resultStatsValidate;
 };
 // console.log(statValidate(array));
-export const functionValidate = (arrayObject) => {
-  const arrayElements = arrayObject.map((element) => `${element.file} ${element.href} ${element.statusText} ${element.status} ${element.text}`);
-  return arrayElements;
+
+// Devuelve el array de objetos en string
+export const formatOutput = (arrayObject) => {
+  let stringElement = '';
+  arrayObject.forEach((element) => {
+    stringElement += `${element.file} ${element.href} ${element.status ? `${element.statusText} ${element.status}` : ''} ${element.text}\n`;
+  });
+  return stringElement;
 };
-// console.log(functionValidate(array));
+// Otra opción para hacer el formatOutput es hacer con map y join('\n')

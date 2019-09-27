@@ -5,3 +5,5 @@ import { functionCli } from './functionCli.js';
 const argv = process.argv.slice(2); // https://flaviocopes.com/node-cli-args/
 // console.log(argv.length);
 functionCli(argv).then((res) => console.log(res));
+// console.log(argv);
+// console.log(argv.length);

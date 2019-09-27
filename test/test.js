@@ -4,7 +4,8 @@ import {
 } from '../src/file.js';
 import { validateLink } from '../src/validate.js';
 import { mdLinks } from '../src/mdLinks.js';
-import { stats, statValidate, functionValidate } from '../src/stats.js';
+import { stats, statValidate, formatOutput } from '../src/stats.js';
+import { functionCli } from '../src/functionCli.js';
 
 const path = require('path');
 // array de objetos con tres propiedades
@@ -33,8 +34,8 @@ const output2 = [{
   status: 404,
   statusText: 'Fail',
 }];
-const output3 = ['C:\\Users\\usuario-libre\\Desktop\\ProyectoLinks\\LIM010-fe-md-links\\test\\prueba\\pruebita\\link.md https://es-la.facebook.com/ OK 200 Facebook',
-  'C:\\Users\\usuario-libre\\Desktop\\ProyectoLinks\\LIM010-fe-md-links\\test\\prueba\\pruebita\\link.md https://www.google.com/hx Fail 404 Google'];
+const output3 = `${path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md')} https://es-la.facebook.com/ OK 200 Facebook\n${path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md')} https://www.google.com/hx Fail 404 Google\n`;
+const output4 = `${path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md')} https://es-la.facebook.com/  Facebook\n${path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md')} https://www.google.com/hx  Google\n`;
 
 describe('Verificando la existencia de la ruta', () => {
   it('Deberia retornar una función', () => {
@@ -169,11 +170,85 @@ describe('Deberia de retornar un String del Total, Unique y Bronken de los links
     expect(statValidate(output2)).toBe('Total: 2\nUnique: 2\nBroken: 1');
   });
 });
-describe('Deberia de retornar un array de string', () => {
+describe('Deberia de retornar un string', () => {
   it('Deberia ser una función', () => {
-    expect(typeof functionValidate).toBe('function');
+    expect(typeof formatOutput).toBe('function');
   });
-  it('Deberia retornar un array de string', () => {
-    expect(functionValidate(output2)).toEqual(output3);
+  it('Deberia retornar un string con la ruta, href, text, status, statusText', () => {
+    expect(formatOutput(output1)).toEqual(output4);
+  });
+  it('Deberia retornar un string con la ruta, href y text', () => {
+    expect(formatOutput(output2)).toEqual(output3);
+  });
+});
+describe('Deberia retornar las diferentes opciones ingresadas en comando', () => {
+  it('Deberia ser una función', () => {
+    expect(typeof functionCli).toBe('function');
+  });
+  it('Deberia retornar un string cuando no se ingresa nada', (done) => {
+    functionCli([]).then((res) => {
+      expect(res).toEqual('Ingrese una ruta, por ejemplo: md-links ./some/example.md\n');
+      done();
+    });
+  });
+  it('Deberia retornar un string cuando le ingresas por comando el path', (done) => {
+    functionCli(['./test/prueba']).then((res) => {
+      expect(res).toEqual(output4);
+      done();
+    });
+  });
+  it('Deberia retornar un string cuando le ingresas una ruta incorrecta', (done) => {
+    functionCli(['./test/prumil']).then((res) => {
+      expect(res).toEqual('Ruta incorrecta');
+      done();
+    });
+  });
+  it('Deberia retornar un string cuando le ingresas por comando el path y --stats', (done) => {
+    functionCli(['./test/prueba', '--stats']).then((res) => {
+      expect(res).toEqual('Total: 2\nUnique: 2');
+      done();
+    });
+  });
+  it('Deberia retornar un string cuando le ingresas por comando el path y --s', (done) => {
+    functionCli(['./test/prueba', '--s']).then((res) => {
+      expect(res).toEqual('Total: 2\nUnique: 2');
+      done();
+    });
+  });
+  it('Deberia retornar un string cuando le ingresas por comando el path y --validate', (done) => {
+    functionCli(['./test/prueba', '--validate']).then((res) => {
+      expect(res).toEqual(output3);
+      done();
+    });
+  });
+  it('Deberia retornar un string cuando le ingresas por comando el path y --v', (done) => {
+    functionCli(['./test/prueba', '--v']).then((res) => {
+      expect(res).toEqual(output3);
+      done();
+    });
+  });
+  it('Deberia retornar un string cuando ingresas mal el comando', (done) => {
+    functionCli(['./test/prueba', '--val']).then((res) => {
+      expect(res).toEqual('Comando incorrecto!!!');
+      done();
+    });
+  });
+  it('Deberia retornar un string cuando le ingresas por comando el path, --validate y --stats', (done) => {
+    functionCli(['./test/prueba', '--validate', '--stats']).then((res) => {
+      expect(res).toEqual('Total: 2\nUnique: 2\nBroken: 1');
+      done();
+    });
+  });
+  it('Deberia retornar un string cuando le ingresas por comando el path, --stats y --validate', (done) => {
+    functionCli(['./test/prueba', '--stats', '--validate']).then((res) => {
+      expect(res).toEqual('Total: 2\nUnique: 2\nBroken: 1');
+      done();
+    });
+  });
+  it('Deberia retornar un string cuando ingresas mal los comandos', (done) => {
+    functionCli(['./test/prueba', '--val', '--sts']).then((res) => {
+      expect(res).toEqual('Comandos incorrectos!!!');
+      done();
+    });
   });
 });

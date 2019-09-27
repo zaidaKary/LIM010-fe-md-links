@@ -1,5 +1,5 @@
 import { mdLinks } from './mdLinks.js';
-import { stats, statValidate, functionValidate } from './stats.js';
+import { stats, statValidate, formatOutput } from './stats.js';
 
 export const functionCli = (matrix) => {
   let output = '';
@@ -7,27 +7,24 @@ export const functionCli = (matrix) => {
     output = new Promise((resolve) => resolve('Ingrese una ruta, por ejemplo: md-links ./some/example.md\n'));
   }
   if (matrix.length === 1) {
-    output = mdLinks(matrix[0]).then((res) => res);
+    output = mdLinks(matrix[0]).then((res) => formatOutput(res))
+      .catch(() => 'Ruta incorrecta');
   }
   if (matrix.length === 2) {
     if (matrix[1] === '--stats' || matrix[1] === '--s') {
+      output = mdLinks(matrix[0], { validate: true })// no es necesario poner el { validate: true }
+        .then((res) => stats(res));
+    } else if (matrix[1] === '--validate' || matrix[1] === '--v') {
       output = mdLinks(matrix[0], { validate: true })
-        .then((res) => stats(res))
-        .catch((error) => error);
-    } if (matrix[1] === '--validate' || matrix[1] === '--v') {
-      output = mdLinks(matrix[0], { validate: true })
-        .then((res) => functionValidate(res))
-        .catch((error) => error);
+        .then((res) => formatOutput(res));
+    } else {
+      output = new Promise((resolve) => resolve('Comando incorrecto!!!'));
     }
-    // else {
-    //   output = new Promise((resolve) => resolve('Comando incorrecto!!!'));
-    // }
   }
   if (matrix.length === 3) {
     if ((matrix[1] === '--validate' && matrix[2] === '--stats') || (matrix[1] === '--stats' && matrix[2] === '--validate')) {
       output = mdLinks(matrix[0], { validate: true })
-        .then((res) => statValidate(res))
-        .catch((error) => error);
+        .then((res) => statValidate(res));
     } else {
       output = new Promise((resolve) => resolve('Comandos incorrectos!!!'));
     }

@@ -15,7 +15,6 @@ export const mdLinks = (route, options) => new Promise((resolve) => {
     resolve(arrayLinksFile(routeAbs));
   }
 });
-
 // mdLinks(path.join(process.cwd(), './test/prueba/pruebita'), { validate: true }).then((res) => {
 //   console.log(res);
 // });
