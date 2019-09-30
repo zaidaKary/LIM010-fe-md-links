@@ -153,6 +153,12 @@ describe('Deberia retornar el array de objetos segun la options: validate', () =
       done();
     });
   });
+  it('Deberia retornar un string cuando la ruta no existe', (done) => {
+    mdLinks(path.join(process.cwd(), './test/pruebaas'), { validate: true }).catch((error) => {
+      expect(error.message).toEqual('La ruta no existe');
+      done();
+    });
+  });
 });
 describe('Deberia retornar un String del Total y Unique de los links', () => {
   it('Deberia ser una función', () => {
@@ -194,12 +200,6 @@ describe('Deberia retornar las diferentes opciones ingresadas en comando', () =>
   it('Deberia retornar un string cuando le ingresas por comando el path', (done) => {
     functionCli(['./test/prueba']).then((res) => {
       expect(res).toEqual(output4);
-      done();
-    });
-  });
-  it('Deberia retornar un string cuando le ingresas una ruta incorrecta', (done) => {
-    functionCli(['./test/prumil']).then((res) => {
-      expect(res).toEqual('Ruta incorrecta');
       done();
     });
   });
@@ -252,3 +252,9 @@ describe('Deberia retornar las diferentes opciones ingresadas en comando', () =>
     });
   });
 });
+// it('Deberia retornar un string cuando le ingresas una ruta incorrecta', (done) => {
+//   functionCli(['./test/pruebaas']).catch((error) => {
+//     expect(error.message).toEqual('La ruta no existe');
+//     done();
+//   });
+// });

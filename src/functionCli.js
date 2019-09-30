@@ -8,15 +8,17 @@ export const functionCli = (matrix) => {
   }
   if (matrix.length === 1) {
     output = mdLinks(matrix[0]).then((res) => formatOutput(res))
-      .catch(() => 'Ruta incorrecta');
+      .catch((e) => e.message);
   }
   if (matrix.length === 2) {
     if (matrix[1] === '--stats' || matrix[1] === '--s') {
       output = mdLinks(matrix[0], { validate: true })// no es necesario poner el { validate: true }
-        .then((res) => stats(res));
+        .then((res) => stats(res))
+        .catch((e) => e.message);
     } else if (matrix[1] === '--validate' || matrix[1] === '--v') {
       output = mdLinks(matrix[0], { validate: true })
-        .then((res) => formatOutput(res));
+        .then((res) => formatOutput(res))
+        .catch((e) => e.message);
     } else {
       output = new Promise((resolve) => resolve('Comando incorrecto!!!'));
     }
@@ -24,7 +26,8 @@ export const functionCli = (matrix) => {
   if (matrix.length === 3) {
     if ((matrix[1] === '--validate' && matrix[2] === '--stats') || (matrix[1] === '--stats' && matrix[2] === '--validate')) {
       output = mdLinks(matrix[0], { validate: true })
-        .then((res) => statValidate(res));
+        .then((res) => statValidate(res))
+        .catch((e) => e.message);
     } else {
       output = new Promise((resolve) => resolve('Comandos incorrectos!!!'));
     }
