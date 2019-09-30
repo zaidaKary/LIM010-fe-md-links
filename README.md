@@ -139,6 +139,15 @@ $ md-links
 Ingrese una ruta, por ejemplo: md-links ./some/example.md
 ```
 
+- Cuando solo ingresamos en la linea de comando `md-links ./prueba`
+
+Retornará un mensaje:
+
+```sh13d99df067c1
+$ md-links ./prueba
+La ruta no existe
+```
+
 - Cuando ingresamos en la linea de comando: `md-links ./some/example.md --valid --sts`
 
 Retornará un mensaje:
