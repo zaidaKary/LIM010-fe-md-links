@@ -36,6 +36,13 @@ const output2 = [{
 }];
 const output3 = `${path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md')} https://es-la.facebook.com/ OK 200 Facebook\n${path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md')} https://www.google.com/hx Fail 404 Google\n`;
 const output4 = `${path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md')} https://es-la.facebook.com/  Facebook\n${path.join(process.cwd(), '\\test\\prueba\\pruebita\\link.md')} https://www.google.com/hx  Google\n`;
+// const output5 = [{
+//   href: 'https://es-la.zaida.com/',
+//   text: 'Links que no existen',
+//   file: path.join(process.cwd(), '\\test\\prueba2\\linksNoExisten.md'),
+//   status: 'Este link no existe',
+//   statusText: 'Fail',
+// }];
 
 describe('Verificando la existencia de la ruta', () => {
   it('Deberia retornar una función', () => {
@@ -129,12 +136,19 @@ describe('Deberia validar los links del array de objetos', () => {
   it('Deberia ser una función', () => {
     expect(typeof validateLink).toBe('function');
   });
-  it('Deberia vevolvernos una promesa', (done) => validateLink(path.join(process.cwd(),
+  it('Deberia devolvernos una promesa de array de objetos', (done) => validateLink(path.join(process.cwd(),
     './test/prueba/pruebita'))
     .then((res) => {
       expect(res).toEqual(output2);
       done();
     }));
+  // it('Deberia devolvernos una promesa de array de objetos con links que no existen', (done) =>
+  // validateLink(path.join(process.cwd(),
+  //   './test/prueba2'))
+  //   .then((res) => {
+  //     expect(res).toEqual(output5);
+  //     done();
+  //   }));
 });
 
 describe('Deberia retornar el array de objetos segun la options: validate', () => {

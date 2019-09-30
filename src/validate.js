@@ -18,6 +18,12 @@ export const validateLink = (route) => {
         resolve(objectNew);
       }
     });
+    // .catch(() => {
+    //   const objectNew = { ...object };
+    //   objectNew.status = 'Este link no existe';
+    //   objectNew.statusText = 'Fail';
+    //   resolve(objectNew);
+    // });
   }));
   // retorna un arreglo con los valores de cada una de las promesas (cuando todas
   // las promesas son exitosas)
@@ -25,3 +31,4 @@ export const validateLink = (route) => {
   return Promise.all(arrayPromises);// devuelve una promesa que termina correctamente
 };
 // validateLink(path.join(process.cwd(), './test/prueba/pruebita')).then((res) => console.log(res));
+// validateLink(path.join(process.cwd(), './test/prueba2')).then((res) => console.log(res));
