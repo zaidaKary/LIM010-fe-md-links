@@ -265,10 +265,10 @@ describe('Deberia retornar las diferentes opciones ingresadas en comando', () =>
       done();
     });
   });
+  it('Deberia retornar un string cuando le ingresas una ruta incorrecta', (done) => {
+    functionCli(['./test/pruebaas']).catch((error) => {
+      expect(error.message).toEqual('La ruta no existe');
+      done();
+    });
+  });
 });
-// it('Deberia retornar un string cuando le ingresas una ruta incorrecta', (done) => {
-//   functionCli(['./test/pruebaas']).catch((error) => {
-//     expect(error.message).toEqual('La ruta no existe');
-//     done();
-//   });
-// });
