@@ -2,9 +2,10 @@ import { arrayLinksFile } from './file.js';
 
 const fetch = require('node-fetch');
 // const path = require('path');
+
 // Validando un link
 export const validateLink = (route) => {
-  const linksArrayFile = arrayLinksFile(route);// array de objetos
+  const linksArrayFile = arrayLinksFile(route);// array de objetos de href, text y file
   const arrayPromises = linksArrayFile.map((object) => new Promise((resolve) => {
     fetch(object.href).then((res) => {
       const objectNew = { ...object };
@@ -30,5 +31,6 @@ export const validateLink = (route) => {
   // retorna el error de la promesa rechazada (cuando una de las promesas es rechazada)
   return Promise.all(arrayPromises);// devuelve una promesa que termina correctamente
 };
+
 // validateLink(path.join(process.cwd(), './test/prueba/pruebita')).then((res) => console.log(res));
 // validateLink(path.join(process.cwd(), './test/prueba2')).then((res) => console.log(res));

@@ -39,6 +39,7 @@
   "dependencies": {
     "is-valid-path": "^0.1.1",
     "marked": "^0.7.0",
+    "md-links": "^0.1.0",
     "node-fetch": "^2.6.0"
   }
 }

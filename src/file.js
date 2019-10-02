@@ -2,9 +2,9 @@ import { convertPathAbs } from './path.js';
 
 const path = require('path');
 const fs = require('fs');
-const marked = require('marked');
+const marked = require('marked'); // se usa para el análisis del markdown para extraer los links
 // Verificando si es o no un archivo
-export const verifyFile = (route) => fs.statSync(route).isFile();
+export const verifyFile = (route) => fs.statSync(route).isFile(); // statSync() proporciona infor. sobre un archivo
 // Verificando si es la extension de un archivo markdown
 export const isMarkdown = (route) => {
   if (path.extname(route) === '.md' || path.extname(route) === '.markdown') {
@@ -13,8 +13,7 @@ export const isMarkdown = (route) => {
   return false;
 };
 // console.log(verifyFile('./test/prueba/markdown.md'));
-// export const readDir = (route) => fs.readdirSync(route);
-// console.log(readDir('./test/prueba'));
+
 // Recorre todos los archivos de las carpetas con extensión .md y lo almacena en un array
 export const saveArrayPathFile = (route) => {
   let arrayFile = [];
@@ -24,18 +23,22 @@ export const saveArrayPathFile = (route) => {
       arrayFile.push(routeAbs); // rellenando el array con las rutas absolutas
     }
   } else {
-    const arrayDirectory = fs.readdirSync(routeAbs);
+    const arrayDirectory = fs.readdirSync(routeAbs); // lee el directorio y retorna un array de string con nombres de archivos y carpetas
     arrayDirectory.forEach((element) => {
-      const arrayFolder = saveArrayPathFile(path.join(routeAbs, element));
-      arrayFile = arrayFile.concat(arrayFolder);
+      const pathComplete = path.join(routeAbs, element) // une varios segmentos en una sola ruta
+      const arrayFolder = saveArrayPathFile(pathComplete); // funcion recursividad (es una funcion que se llama asi misma)
+      arrayFile = arrayFile.concat(arrayFolder); // une dos o más arrays
     });
   }
   return arrayFile;
 };
 // console.log(saveArrayPathFile('./test/prueba'));
+
 // Lee el contenido de un archivo
-export const readFile = (route) => fs.readFileSync(route, 'utf8');
+export const readFile = (route) => fs.readFileSync(route, 'utf8'); // devuelve el contenido de la ruta.
+// utf8: formato de codificación de caracteres unicode
 // console.log(readFile('./test/prueba/pruebita/link.md'));
+
 // Obteniendo los links de las rutas absolutas en una array de objetos (href, text, file)
 export const arrayLinksFile = (route) => {
   const linksArrayFile = [];

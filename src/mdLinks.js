@@ -3,7 +3,7 @@ import { arrayLinksFile } from './file.js';
 import { validateLink } from './validate.js';
 
 // const path = require('path');
-
+// funcion de mdlinks
 export const mdLinks = (route, options) => new Promise((resolve, reject) => {
   if (existPath(route)) {
     // convirtiendo a ruta absoluta

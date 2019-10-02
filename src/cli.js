@@ -7,3 +7,5 @@ const argv = process.argv.slice(2); // https://flaviocopes.com/node-cli-args/
 functionCli(argv).then((res) => console.log(res));
 // console.log(argv);
 // console.log(argv.length);
+
+// nota: process.argv es una matriz que contiene todos los argumentos de invocación de línea de comando.

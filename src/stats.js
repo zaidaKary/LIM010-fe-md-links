@@ -14,7 +14,7 @@
 //   status: 404,
 //   statusText: 'Fail',
 // }];
-
+// funcion opcion --stats
 export const stats = (arrayObject) => {
   const arrayLinks = arrayObject.map((element) => element.href);
   const unique = [...new Set(arrayLinks)];
@@ -22,6 +22,8 @@ export const stats = (arrayObject) => {
   return resultStats;
 };
 // console.log(stats(array));
+
+// funcion opcion --validate --stats
 export const statValidate = (arrayObject) => {
   const arrayLinks = arrayObject.map((element) => element.href);
   const unique = [...new Set(arrayLinks)];
