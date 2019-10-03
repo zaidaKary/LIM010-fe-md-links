@@ -18,13 +18,12 @@ export const validateLink = (route) => {
         objectNew.statusText = 'Fail';// FAIL
         resolve(objectNew);
       }
+    }).catch(() => {
+      const objectNew = { ...object };
+      objectNew.status = 'Este link no existe';
+      objectNew.statusText = 'Fail';
+      resolve(objectNew);
     });
-    // .catch(() => {
-    //   const objectNew = { ...object };
-    //   objectNew.status = 'Este link no existe';
-    //   objectNew.statusText = 'Fail';
-    //   resolve(objectNew);
-    // });
   }));
   // retorna un arreglo con los valores de cada una de las promesas (cuando todas
   // las promesas son exitosas)

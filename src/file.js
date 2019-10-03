@@ -4,7 +4,8 @@ const path = require('path');
 const fs = require('fs');
 const marked = require('marked'); // se usa para el análisis del markdown para extraer los links
 // Verificando si es o no un archivo
-export const verifyFile = (route) => fs.statSync(route).isFile(); // statSync() proporciona infor. sobre un archivo
+export const verifyFile = (route) => fs.statSync(route).isFile();
+// statSync() proporciona infor. sobre un archivo
 // Verificando si es la extension de un archivo markdown
 export const isMarkdown = (route) => {
   if (path.extname(route) === '.md' || path.extname(route) === '.markdown') {
@@ -23,10 +24,12 @@ export const saveArrayPathFile = (route) => {
       arrayFile.push(routeAbs); // rellenando el array con las rutas absolutas
     }
   } else {
-    const arrayDirectory = fs.readdirSync(routeAbs); // lee el directorio y retorna un array de string con nombres de archivos y carpetas
+    const arrayDirectory = fs.readdirSync(routeAbs); // lee el directorio y retorna un array
+    // de string con nombres de archivos y carpetas
     arrayDirectory.forEach((element) => {
-      const pathComplete = path.join(routeAbs, element) // une varios segmentos en una sola ruta
-      const arrayFolder = saveArrayPathFile(pathComplete); // funcion recursividad (es una funcion que se llama asi misma)
+      const pathComplete = path.join(routeAbs, element); // une varios segmentos en una sola ruta
+      // funcion recursividad (es una funcion que se llama asi misma)
+      const arrayFolder = saveArrayPathFile(pathComplete);
       arrayFile = arrayFile.concat(arrayFolder); // une dos o más arrays
     });
   }
