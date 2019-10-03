@@ -212,7 +212,7 @@ Los objetivos de aprendizaje desarrollados en este proyecto son los siguientes:
 - [x] package.json
 - [x] crear modules
 - [x] Instalar y usar modules
-- [ ] npm scripts
+- [x] npm scripts
 - [x] CLI (Command Line Interface - Interfaz de Línea de Comando)
 
 ### Testing
@@ -220,7 +220,7 @@ Los objetivos de aprendizaje desarrollados en este proyecto son los siguientes:
 - [x] Testeo asíncrono
 - [ ] Uso de librerias de Mock
 - [ ] Mocks manuales
-- [ ] Testeo para multiples Sistemas Operativos
+- [x] Testeo para multiples Sistemas Operativos
 
 ### Git y Github
 - [x] Organización en Github
