@@ -11,7 +11,7 @@ export const functionCli = (matrix) => {
   }
   if (matrix.length === 2) {
     if (matrix[1] === '--stats' || matrix[1] === '--s') {
-      output = mdLinks(matrix[0], { validate: true })// no es necesario poner el { validate: true }
+      output = mdLinks(matrix[0])
         .then((res) => stats(res));
     } else if (matrix[1] === '--validate' || matrix[1] === '--v') {
       output = mdLinks(matrix[0], { validate: true })

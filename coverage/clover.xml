@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1570138036089" clover="3.2.0">
-  <project timestamp="1570138036090" name="All files">
-    <metrics statements="103" coveredstatements="103" conditionals="48" coveredconditionals="48" methods="32" coveredmethods="32" elements="183" coveredelements="183" complexity="0" loc="103" ncloc="103" packages="1" files="6" classes="6"/>
+<coverage generated="1570138439422" clover="3.2.0">
+  <project timestamp="1570138439423" name="All files">
+    <metrics statements="107" coveredstatements="103" conditionals="48" coveredconditionals="48" methods="33" coveredmethods="32" elements="188" coveredelements="183" complexity="0" loc="107" ncloc="107" packages="1" files="6" classes="6"/>
     <file name="file.js" path="C:\Users\usuario-libre\Desktop\ProyectoLinks\LIM010-fe-md-links\src\file.js">
       <metrics statements="31" coveredstatements="31" conditionals="8" coveredconditionals="8" methods="8" coveredmethods="8"/>
       <line num="3" count="1" type="stmt"/>
@@ -65,8 +65,8 @@
       <line num="8" count="11" type="cond" truecount="2" falsecount="0"/>
       <line num="10" count="9" type="stmt"/>
       <line num="11" count="9" type="cond" truecount="4" falsecount="0"/>
-      <line num="13" count="7" type="stmt"/>
-      <line num="16" count="2" type="stmt"/>
+      <line num="13" count="5" type="stmt"/>
+      <line num="16" count="4" type="stmt"/>
       <line num="19" count="2" type="stmt"/>
     </file>
     <file name="path.js" path="C:\Users\usuario-libre\Desktop\ProyectoLinks\LIM010-fe-md-links\src\path.js">
@@ -107,21 +107,25 @@
       <line num="42" count="5" type="stmt"/>
     </file>
     <file name="validate.js" path="C:\Users\usuario-libre\Desktop\ProyectoLinks\LIM010-fe-md-links\src\validate.js">
-      <metrics statements="14" coveredstatements="14" conditionals="4" coveredconditionals="4" methods="4" coveredmethods="4"/>
+      <metrics statements="18" coveredstatements="14" conditionals="4" coveredconditionals="4" methods="5" coveredmethods="4"/>
       <line num="3" count="1" type="stmt"/>
       <line num="7" count="1" type="stmt"/>
-      <line num="8" count="8" type="stmt"/>
-      <line num="9" count="16" type="stmt"/>
-      <line num="10" count="16" type="stmt"/>
-      <line num="11" count="16" type="stmt"/>
-      <line num="12" count="16" type="cond" truecount="4" falsecount="0"/>
-      <line num="13" count="8" type="stmt"/>
-      <line num="14" count="8" type="stmt"/>
-      <line num="15" count="8" type="stmt"/>
-      <line num="17" count="8" type="stmt"/>
-      <line num="18" count="8" type="stmt"/>
-      <line num="19" count="8" type="stmt"/>
-      <line num="32" count="8" type="stmt"/>
+      <line num="8" count="6" type="stmt"/>
+      <line num="9" count="12" type="stmt"/>
+      <line num="10" count="12" type="stmt"/>
+      <line num="11" count="12" type="stmt"/>
+      <line num="12" count="12" type="cond" truecount="4" falsecount="0"/>
+      <line num="13" count="6" type="stmt"/>
+      <line num="14" count="6" type="stmt"/>
+      <line num="15" count="6" type="stmt"/>
+      <line num="17" count="6" type="stmt"/>
+      <line num="18" count="6" type="stmt"/>
+      <line num="19" count="6" type="stmt"/>
+      <line num="22" count="0" type="stmt"/>
+      <line num="23" count="0" type="stmt"/>
+      <line num="24" count="0" type="stmt"/>
+      <line num="25" count="0" type="stmt"/>
+      <line num="31" count="6" type="stmt"/>
     </file>
   </project>
 </coverage>
